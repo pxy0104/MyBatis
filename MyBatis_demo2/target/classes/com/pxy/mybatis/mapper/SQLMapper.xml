@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace与某一个接口全类名一致-->
+<mapper namespace="com.pxy.mybatis.mapper.SQLMapper">
+    <!--    List<Student> getStudentByLike(@Param("studentname") String studentname);-->
+
+    <select id="getStudentByLike" resultType="Student">
+<!-- select * from student where studentname like '%${studentname}%'-->
+<!-- select * from student where studentname like  concat('%',#{studentname},'%') -->
+        select * from student where studentname like "%"#{studentname}"%"
+
+    </select>
+<!--    int deleteMore(@Param("ids") String ids);
+-->
+    <select id="deleteMore">
+<!--
+            //批量删除时,要用${}
+            #{}会自动加''
+-->
+        delete from student where id in (${ids})
+    </select>
+<!--        List<Student> getStudentByTableName(@Param("tableName") String tableName);
+-->
+    <select id="getStudentByTableName" resultType="Student">
+        select * from ${tableName}
+    </select>
+<!--void insertStudent(Student student);
+        useGeneratedKeys:设置当前标签中的sql使用了自增的主键
+        keyProperty:将自增的主键的值赋值给传输到映射文件中参数的某个属性
+-->
+
+    <insert id="insertStudent" useGeneratedKeys="true" keyProperty="id">
+        insert into student values(null,#{studentname},#{gender},#{age})
+
+    </insert>
+</mapper>

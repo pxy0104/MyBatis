@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxy.mybatis.mapper.StudentMapper">
+<!--    int insertStudent()  -->
+    <insert id="insertStudent">
+        insert into student values(6,'Wang5','女',30)
+    </insert>
+<!--   int deleteStudent()  -->
+    <delete id="deleteStudent">
+        delete  from student where id = 7
+    </delete>
+    <update id="updateStudent">
+        update student set studentname = '${studentname}' where id = #{id}
+    </update>
+<!--
+Type:设置默认的映射关系
+Map:设置自定义的映射关系
+-->
+    <select id="getUserById" resultType="Student">
+        select * from student where id = 7
+    </select>
+<!--    List<Student> getAllUser();   -->
+    <select id="getAllStudent" resultType="Student">
+        select * from student
+    </select>
+</mapper>

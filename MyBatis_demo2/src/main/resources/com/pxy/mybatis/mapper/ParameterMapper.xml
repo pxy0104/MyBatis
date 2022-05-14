@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace与某一个接口全类名一致-->
+<mapper namespace="com.pxy.mybatis.mapper.ParameterMapper">
+    <!--List<Student> getAllStudent();    -->
+    <select id="getAllStudent" resultType="Student">
+        select *
+        from student
+    </select>
+
+<!--    getStudentByStudentname-->
+<!--    单参数 访问-->
+    <select id="getStudentByStudentname" resultType="Student">
+        select *
+        from student
+        where studentname = '${studentname}'
+    </select>
+
+    <!--    Student checkLogin(int id,String studentname);-->
+    <select id="checkLogin" resultType="Student">
+        select *
+        from student
+        where id = #{param1}
+          and studentname = #{param2}
+    </select>
+    <!--        Student checkLoginByMap(Map<Integer,String> map);
+    -->
+    <select id="checkLoginByMap" resultType="Student">
+        select *
+        from student
+        where id = #{id}
+          and studentname = #{studentname}
+    </select>
+    <!--    int insertStudent(Student student);-->
+    <insert id="insertStudent">
+        insert into student
+        values (null, #{studentname}, #{gender}, #{age})
+    </insert>
+    <!--        Student checkLoginByParam(@Param("id") int id, @Param("studentname") String studentname, @Param("gender") char gender,@Param("age") int age );
+    -->
+    <select id="checkLoginByParam" resultType="Student">
+        select *
+        from student
+        where id = #{id}
+          and studentname = #{studentname}
+    </select>
+</mapper>

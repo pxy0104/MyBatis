@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact name="unnamed">
+    <output-path>$PROJECT_DIR$/out/artifacts/unnamed</output-path>
+    <root id="root">
+      <element id="module-output" name="MyBatis_demo1" />
+      <element id="library" level="module" name="JUnit4" module-name="MyBatis_demo1" />
+    </root>
+  </artifact>
+</component>
