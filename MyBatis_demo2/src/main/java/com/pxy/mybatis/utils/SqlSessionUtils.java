@@ -12,16 +12,12 @@ public class SqlSessionUtils {
         SqlSession sqlSession = null;
         try {
             InputStream is = Resources.getResourceAsStream("mybatis-config.xml");
-//            获取Builder调用build
+            //获取Builder调用build
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
             sqlSession = sqlSessionFactory.openSession(true);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
             return sqlSession;
-
-
     }
 }

@@ -20,7 +20,7 @@ public class ParameterMapperTest {
      * ${}本质字符串拼接
      * #{}本质占位符赋值
      */
-//    单参数   多参数arg0 arg1 param1 param2    map传参数   mapper接口的实体类类型的参数   @Param传参数
+    //单参数   多参数arg0 arg1 param1 param2    map传参数   mapper接口的实体类类型的参数   @Param传参数
 
     /**
      * 使用@Param注解参数
@@ -32,21 +32,18 @@ public class ParameterMapperTest {
      */
     @Test
     public void testCheckLoginByParam() {
-//        @Param传参数
+        //@Param传参数
         //获得SqlSession对象
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         //获取mapper接口对象
         ParameterMapper mapper = sqlSession.getMapper(ParameterMapper.class);
 
-        Student student = mapper.checkLoginByParam(11, "熊广兴");
+        Student student = mapper.checkLoginByParam(11, "张三");
         if(student != null){
-
             System.out.println("已找到，可以进行登录");
         }else {
             System.out.println("未找到");
-
         }
-
         System.out.println(student);
     }
 
@@ -54,21 +51,21 @@ public class ParameterMapperTest {
     public void testInsertStudent() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         ParameterMapper mapper = sqlSession.getMapper(ParameterMapper.class);
-//        mapper接口的实体类类型的参数
-        int result = mapper.insertStudent(new Student(0, "JiJi", '女', 19));
+        //mapper接口的实体类类型的参数
+        int result = mapper.insertStudent(new Student(0, "赵六", '女', 19));
         System.out.println(result);
     }
 
-    //    单参数
+    //单参数
     @Test
-    public void testGetStudentByStudentname() {
+    public void testGetStudentByName() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         ParameterMapper mapper = sqlSession.getMapper(ParameterMapper.class);
-        Student student = mapper.getStudentByStudentname("李白");
+        Student student = mapper.getStudentByName("李白");
         System.out.println(student);
     }
 
-    //    多参数arg0 arg1 param1 param2
+    //多参数arg0 arg1 param1 param2
     @Test
     public void testCheckLogin() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
@@ -82,10 +79,10 @@ public class ParameterMapperTest {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         ParameterMapper mapper = sqlSession.getMapper(ParameterMapper.class);
         Map<String, Object> map = new HashMap<>();
-//        map传参数
-//        利用map时 键值对中的键要和mapper.xml标签中的#{键}一致
+        //map传参数
+        //利用map时 键值对中的键要和mapper.xml标签中的#{键}一致
         map.put("id", 1);
-        map.put("studentname", "张飞");
+        map.put("name", "张飞");
         Student student = mapper.checkLoginByMap(map);
         System.out.println(student);
     }
@@ -95,9 +92,7 @@ public class ParameterMapperTest {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         ParameterMapper mapper = sqlSession.getMapper(ParameterMapper.class);
         List<Student> list = mapper.getAllStudent();
-
         list.forEach(student -> System.out.println(student));
-
     }
 
     @Test
@@ -105,12 +100,9 @@ public class ParameterMapperTest {
         Class.forName("");
         Connection connection = DriverManager.getConnection("", "", "");
         //字符串拼接
-//        PreparedStatement preparedStatement = connection.prepareStatement("");
+        //PreparedStatement preparedStatement = connection.prepareStatement("");
         PreparedStatement preparedStatement = connection.prepareStatement("select * from student where id = ?");
         String id = "2";
         preparedStatement.setString(1, id);
     }
-
-
-
 }

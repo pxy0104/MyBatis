@@ -4,46 +4,44 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace与某一个接口全类名一致-->
 <mapper namespace="com.pxy.mybatis.mapper.ParameterMapper">
-    <!--List<Student> getAllStudent();    -->
+    <!--List<Student> getAllStudent();-->
     <select id="getAllStudent" resultType="Student">
         select *
         from student
     </select>
 
-<!--    getStudentByStudentname-->
-<!--    单参数 访问-->
-    <select id="getStudentByStudentname" resultType="Student">
+    <!--getStudentByName-->
+    <!--单参数 访问-->
+    <select id="getStudentByName" resultType="Student">
         select *
         from student
-        where studentname = '${studentname}'
+        where name = '${name}'
     </select>
 
-    <!--    Student checkLogin(int id,String studentname);-->
+    <!--Student checkLogin(int id,String name);-->
     <select id="checkLogin" resultType="Student">
         select *
         from student
         where id = #{param1}
-          and studentname = #{param2}
+          and name = #{param2}
     </select>
-    <!--        Student checkLoginByMap(Map<Integer,String> map);
-    -->
+    <!--Student checkLoginByMap(Map<Integer,String> map);-->
     <select id="checkLoginByMap" resultType="Student">
         select *
         from student
         where id = #{id}
-          and studentname = #{studentname}
+          and name = #{name}
     </select>
-    <!--    int insertStudent(Student student);-->
+    <!--int insertStudent(Student student);-->
     <insert id="insertStudent">
         insert into student
-        values (null, #{studentname}, #{gender}, #{age})
+        values (null, #{name}, #{gender}, #{age})
     </insert>
-    <!--        Student checkLoginByParam(@Param("id") int id, @Param("studentname") String studentname, @Param("gender") char gender,@Param("age") int age );
-    -->
+    <!-- Student checkLoginByParam(@Param("id") int id, @Param("name") String name, @Param("gender") char gender,@Param("age") int age );-->
     <select id="checkLoginByParam" resultType="Student">
         select *
         from student
         where id = #{id}
-          and studentname = #{studentname}
+          and name = #{name}
     </select>
 </mapper>
