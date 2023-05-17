@@ -13,21 +13,20 @@ public interface StudentMapper {
 
     /**
      * 删除一个用户信息
-     * @return
      */
     int deleteStudent();
 
     /**
      * 修改用户信息
      */
-    int updateStudent(@Param("id") int id,@Param("studentname") String studentname);
+    int updateStudent(@Param("id") int id,@Param("name") String name);
     /**
-     * 查询：根据ID查询
+     * 根据ID查询
      */
-    Student getUserById();
+    Student getStudentById(@Param("id") int id);
 
     /**
-     * select * from student;查询所有用户信息
+     * 查询所有用户信息
      */
     List<Student> getAllStudent();
 }

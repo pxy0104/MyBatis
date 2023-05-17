@@ -2,16 +2,16 @@ package com.pxy.mybatis.pojo;
 
 public class Student {
     private int id;
-    private String studentname;
+    private String name;
     private char gender;
     private int age;
 
     public Student() {
     }
 
-    public Student(int id, String studentname, char gender, int age) {
+    public Student(int id, String name, char gender, int age) {
         this.id = id;
-        this.studentname = studentname;
+        this.name = name;
         this.gender = gender;
         this.age = age;
     }
@@ -24,12 +24,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getStudentname() {
-        return studentname;
+    public String getName() {
+        return name;
     }
 
-    public void setStudentname(String studentname) {
-        this.studentname = studentname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public char getGender() {
@@ -52,7 +52,7 @@ public class Student {
     public String toString() {
         return "Student{" +
                 "id=" + id +
-                ", studentname='" + studentname + '\'' +
+                ", name='" + name + '\'' +
                 ", gender=" + gender +
                 ", age=" + age +
                 '}';

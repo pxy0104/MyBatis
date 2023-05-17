@@ -13,7 +13,7 @@
     <!--
             设置类型别名 (不区分大小写)
             type:全类名
-            alias:别名
+            alias:别名(若不设置，则为类名切不区分大小写)
     -->
     <typeAliases>
         <typeAlias type="com.pxy.mybatis.pojo.Student"></typeAlias>
@@ -21,7 +21,7 @@
         以包为单位，将包下所有的类型设置默认的类型别名，即类名且不区分大小写
         直接把类名（不区分大小写）当作默认类型别名
         -->
-        <!-- <package name="com.pxy.mybatis.pojo.Student"/>-->
+        <!-- <package name="com.pxy.mybatis.pojo"/>-->
     </typeAliases>
     <!--设置连接数据库的环境-->
     <environments default="development">
@@ -29,22 +29,11 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="${jdbc.driver}"/>
-                <!--                   数据库studentdb-->
                 <property name="url" value="${jdbc.url}"/>
                 <property name="username" value="${jdbc.username}"/>
                 <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
-        <!--        <environment id="test">-->
-        <!--            <transactionManager type="JDBC"/>-->
-        <!--            <dataSource type="POOLED">-->
-        <!--                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
-        <!--                &lt;!&ndash;                   数据库studentdb&ndash;&gt;-->
-        <!--                <property name="url" value="jdbc:mysql://localhost:3306/studentdb"/>-->
-        <!--                <property name="username" value="root"/>-->
-        <!--                <property name="password" value="root"/>-->
-        <!--            </dataSource>-->
-        <!--        </environment>-->
     </environments>
 
     <!--引入映射文件-->
@@ -54,7 +43,6 @@
             1.mapper接口所在的包要和映射文件所在的包一致
             2.mapper接口的名字要和映射文件的名字一致
         -->
-
         <package name="com.pxy.mybatis.mapper"/>
     </mappers>
 </configuration>
