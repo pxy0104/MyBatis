@@ -9,30 +9,29 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * SelectMapper接口测试
+ */
 public class SelectMapperTest {
-    /**
-     * SelectMapper接口测试
-     */
+
     @Test
-    public void tsetGetStudentById() {
+    public void testGetStudentById() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         SelectMapper mapper = sqlSession.getMapper(SelectMapper.class);
-        Student student = mapper.getStudentById(11);
+        Student student = mapper.getStudentById(2);
         System.out.println(student);
     }
-    //查询所有Student
 
-    /**
-     * SelectMapper接口测试
-     */
+    //查询所有Student
     @Test
-    public void tsetGetAllStudent() {
+    public void testGetAllStudent() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         SelectMapper mapper = sqlSession.getMapper(SelectMapper.class);
         List list = mapper.getAllStudent();
         list.forEach(student -> System.out.println(student));
     }
 
+    //int
     @Test
     public void testGetCount(){
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
@@ -40,15 +39,16 @@ public class SelectMapperTest {
         int count = mapper.getCount();
         System.out.println(count);
     }
+
     @Test
     public void testGetStudentByIdToMap(){
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         SelectMapper mapper = sqlSession.getMapper(SelectMapper.class);
-        Map student= mapper.getStudentByIdToMap(9);
+        Map student= mapper.getStudentByIdToMap(2);
         System.out.println(student);
     }
     @Test
-    public void tsetGetAllStudentToMap() {
+    public void testGetAllStudentToMap() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         SelectMapper mapper = sqlSession.getMapper(SelectMapper.class);
 //        List<Map<String,Object>> list = mapper.getAllStudentToMap();

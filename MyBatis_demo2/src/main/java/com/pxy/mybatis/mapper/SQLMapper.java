@@ -9,7 +9,7 @@ public interface SQLMapper {
     /**
      * SQL模糊查询
      */
-    List<Student> getStudentByLike(@Param("studentname") String studentname);
+    List<Student> getStudentByLike(@Param("name") String name);
 
     /**
      * 批量删除
@@ -23,7 +23,7 @@ public interface SQLMapper {
     /**
      * Insert Studnet
      * insert into student
-     *         values (null, #{studentname}, #{gender}, #{age})
+     *         values (null, #{name}, #{gender}, #{age})
      */
     void insertStudent(Student student);
 }

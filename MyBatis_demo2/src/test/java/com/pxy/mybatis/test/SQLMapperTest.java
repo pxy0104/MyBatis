@@ -22,8 +22,7 @@ public class SQLMapperTest {
         //批量删除时,要用${}
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         SQLMapper mapper = sqlSession.getMapper(SQLMapper.class);
-        Integer result = mapper.deleteMore("6,8,9");
-        System.out.println(result);
+        mapper.deleteMore("1,2,3");
     }
 
     //动态表名查询
@@ -32,7 +31,6 @@ public class SQLMapperTest {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         SQLMapper mapper = sqlSession.getMapper(SQLMapper.class);
         List<Student> list = mapper.getStudentByTableName("student");
-        System.out.println(list);
         list.forEach(System.out::println);
     }
 
@@ -40,7 +38,8 @@ public class SQLMapperTest {
     public void testInsertStudent() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         SQLMapper mapper = sqlSession.getMapper(SQLMapper.class);
-        Student student = new Student(0, "LiMing", '女', 17);
+        Student student = new Student(0, "DaMei", '女', 17);
         mapper.insertStudent(student);
+        System.out.println(student);
     }
 }

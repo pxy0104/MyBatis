@@ -10,14 +10,15 @@
         from student
     </select>
 
-    <!--getStudentByName-->
-    <!--单参数 访问-->
+    <!--单参数-->
+    <!--Student getStudentByName(String name);-->
     <select id="getStudentByName" resultType="Student">
         select *
         from student
-        where name = '${name}'
+        where name = #{name}
     </select>
 
+    <!--多个参数-->
     <!--Student checkLogin(int id,String name);-->
     <select id="checkLogin" resultType="Student">
         select *
@@ -25,6 +26,8 @@
         where id = #{param1}
           and name = #{param2}
     </select>
+
+    <!--利用map传值-->
     <!--Student checkLoginByMap(Map<Integer,String> map);-->
     <select id="checkLoginByMap" resultType="Student">
         select *
@@ -32,12 +35,15 @@
         where id = #{id}
           and name = #{name}
     </select>
+
+    <!--实体类类型-->
     <!--int insertStudent(Student student);-->
     <insert id="insertStudent">
         insert into student
         values (null, #{name}, #{gender}, #{age})
     </insert>
-    <!-- Student checkLoginByParam(@Param("id") int id, @Param("name") String name, @Param("gender") char gender,@Param("age") int age );-->
+
+    <!--Student checkLoginByParam(@Param("id") int id, @Param("name") String name, @Param("gender") char gender,@Param("age") int age );-->
     <select id="checkLoginByParam" resultType="Student">
         select *
         from student

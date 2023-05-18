@@ -4,31 +4,34 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace与某一个接口全类名一致-->
 <mapper namespace="com.pxy.mybatis.mapper.SelectMapper">
-    <!--    Student getStudentById(@Param("id") int id);-->
+    <!--Student getStudentById(@Param("id") int id);-->
     <select id="getStudentById" resultType="Student">
         select *
         from student
         where id = #{id}
     </select>
+
     <!--List<Student> getAllStudent();-->
     <select id="getAllStudent" resultType="Student">
         select *
         from student
     </select>
-    <!-- int getCount();-->
+
+    <!--int getCount();-->
     <select id="getCount" resultType="int">
         select COUNT(*)
         from student
     </select>
-    <!--    Map<String,Object> getStudentByIdToMap(@Param("id") int id);-->
+
+    <!--Map<String,Object> getStudentByIdToMap(@Param("id") int id);-->
     <select id="getStudentByIdToMap" resultType="map">
         select *
         from student
         where id = #{id}
     </select>
-    <!--    Map<String,Object> getAllStudentToMap();
-   -->
-    <select id="getAllStudentToMap" resultType="Map">
+
+    <!--Map<String,Object> getAllStudentToMap();-->
+    <select id="getAllStudentToMap" resultType="map">
         select * from student
     </select>
 </mapper>

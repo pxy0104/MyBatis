@@ -29,7 +29,7 @@ public interface SelectMapper {
     /**
      * 查询所有Student 返回map集合
      */
-//    List<Map<String,Object>> getAllStudentToMap();
+    //List<Map<String,Object>> getAllStudentToMap();
     @MapKey("id")
     List<Map<String,Object>> getAllStudentToMap();
 }

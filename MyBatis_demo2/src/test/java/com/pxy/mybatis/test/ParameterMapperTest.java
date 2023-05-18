@@ -15,21 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ParameterMapperTest {
-    /**
-     * MyBatis获取参数的两种方式 ${}  #{}
-     * ${}本质字符串拼接
-     * #{}本质占位符赋值
-     */
-    //单参数   多参数arg0 arg1 param1 param2    map传参数   mapper接口的实体类类型的参数   @Param传参数
 
-    /**
-     * 使用@Param注解参数
-     * @Param("值") 注解的值 通过#{} ${}以键的方式访问值即可，但是需要注意${}的单引号问题
-     * 以注解的值为键，以参数为值
-     * 以param1，param2...为键，以参数为值
-     * 注解传参数
-     * @param
-     */
     @Test
     public void testCheckLoginByParam() {
         //@Param传参数
@@ -37,8 +23,7 @@ public class ParameterMapperTest {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         //获取mapper接口对象
         ParameterMapper mapper = sqlSession.getMapper(ParameterMapper.class);
-
-        Student student = mapper.checkLoginByParam(11, "张三");
+        Student student = mapper.checkLoginByParam(1, "张三");
         if(student != null){
             System.out.println("已找到，可以进行登录");
         }else {
@@ -46,7 +31,7 @@ public class ParameterMapperTest {
         }
         System.out.println(student);
     }
-
+    //实体类类型
     @Test
     public void testInsertStudent() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
@@ -61,7 +46,7 @@ public class ParameterMapperTest {
     public void testGetStudentByName() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         ParameterMapper mapper = sqlSession.getMapper(ParameterMapper.class);
-        Student student = mapper.getStudentByName("李白");
+        Student student = mapper.getStudentByName("赵六");
         System.out.println(student);
     }
 
@@ -70,10 +55,11 @@ public class ParameterMapperTest {
     public void testCheckLogin() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         ParameterMapper mapper = sqlSession.getMapper(ParameterMapper.class);
-        Student student = mapper.checkLogin(1, "张飞");
+        Student student = mapper.checkLogin(1, "张三");
         System.out.println(student);
     }
 
+    //自定义map传值
     @Test
     public void testCheckLoginByMap() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
@@ -82,7 +68,7 @@ public class ParameterMapperTest {
         //map传参数
         //利用map时 键值对中的键要和mapper.xml标签中的#{键}一致
         map.put("id", 1);
-        map.put("name", "张飞");
+        map.put("name", "张三");
         Student student = mapper.checkLoginByMap(map);
         System.out.println(student);
     }

@@ -11,12 +11,13 @@ import java.util.Map;
  */
 public interface ParameterMapper {
     /**
+     * 参数为实体类类型
      * 添加学生信息
      */
     int insertStudent(Student student);
 
     /**
-     * 验证登录使用@param 传参数
+     * 验证登录使用@param传参数
      * 只需要id和学生姓名
      */
     Student checkLoginByParam(@Param("id") int id, @Param("name") String name);
@@ -27,6 +28,7 @@ public interface ParameterMapper {
     Student checkLoginByMap(Map<String, Object> map);
 
     /**
+     * 多参数
      * 验证登录
      */
     Student checkLogin(int id, String name);
