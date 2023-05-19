@@ -8,6 +8,17 @@ public class Emp {
     private String email;
     private Dept dept;
 
+    public Emp() {
+    }
+
+    public Emp(Integer eid, String empName, Integer age, String sex, String email) {
+        this.eid = eid;
+        this.empName = empName;
+        this.age = age;
+        this.sex = sex;
+        this.email = email;
+    }
+
     public Dept getDept() {
         return dept;
     }
@@ -16,8 +27,6 @@ public class Emp {
         this.dept = dept;
     }
 
-    public Emp() {
-    }
 
     @Override
     public String toString() {
@@ -68,14 +77,6 @@ public class Emp {
     }
 
     public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Emp(Integer eid, String empName, Integer age, String sex, String email) {
-        this.eid = eid;
-        this.empName = empName;
-        this.age = age;
-        this.sex = sex;
         this.email = email;
     }
 }

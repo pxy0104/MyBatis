@@ -4,13 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties resource="jdbc.properties"></properties>
-        <!--设置MyBatis全部配置-->
+
+    <!--设置MyBatis全部配置-->
     <settings>
-        <!-- 将下划线_自动映射为驼峰,emp_name:empName-->
+        <!--将下划线_自动映射为驼峰,emp_name:empName-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-<!--        延迟加载 默认是false-->
+        <!--延迟加载,默认是false-->
         <setting name="lazyLoadingEnabled" value="true"/>
     </settings>
+
     <typeAliases>
         <package name="com.pxy.mybatis.pojo"/>
     </typeAliases>
@@ -26,6 +28,7 @@
             </dataSource>
         </environment>
     </environments>
+
     <mappers>
         <package name="com.pxy.mybatis.mapper"/>
     </mappers>

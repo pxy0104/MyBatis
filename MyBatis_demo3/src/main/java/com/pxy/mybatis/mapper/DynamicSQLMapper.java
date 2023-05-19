@@ -9,14 +9,14 @@ public interface DynamicSQLMapper {
     /**
      * 动态查询（if）
      * @param emp
-     * @return
+     * @return List<Emp>
      */
     List<Emp> getEmpByCondition(Emp emp);
 
     /**
      * 测试choose、when、otherwise
      * @param emp
-     * @return
+     * @return List
      */
     List<Emp> getEmpByChoose(Emp emp);
     /**
@@ -24,4 +24,10 @@ public interface DynamicSQLMapper {
      *
      */
     int deleteMoreByArray(@Param("eids") Integer[] eids);
+
+    /**
+     * 批量添加
+     * @return int
+     */
+    int insertMoreByList(@Param("emps") List<Emp> emps);
 }

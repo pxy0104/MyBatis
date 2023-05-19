@@ -4,6 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace与某一个接口全类名一致-->
 <mapper namespace="com.pxy.mybatis.mapper.EmpMapper">
+
+    <!--List<Emp> getAllEmp(); -->
+    <select id="getAllEmpOld" resultMap="empResultMap">
+        select *
+        from t_emp
+    </select>
     <!--
         type:实体类名
         id:设置主键映射关系
@@ -18,22 +24,23 @@
         <result property="age" column="age"></result>
         <result property="sex" column="sex"></result>
         <result property="email" column="email"></result>
-
     </resultMap>
-    <!--        List<Emp> getAllEmp(); -->
-    <select id="getAllEmp" resultMap="empResultMap">
-        select *
-        from t_emp
-    </select>
-    <select id="getAllEmpOld" resultType="Emp">
-        <!--         select eid, emp_name empName, age, sex, email
-                from t_emp-->
+
+    <!--自定义字段别名/开启驼峰命名全局配置-->
+    <select id="getAllEmp" resultType="Emp">
+        <!--select eid, emp_name empName, age, sex, email from t_emp-->
         select *
         from t_emp
     </select>
 
 
-    <!--处理多对一映射关系方式一:级联属性赋值-->
+    <!--Emp getEmpAndDept(@Param("eid") Integer eid);-->
+    <select id="getEmpAndDept" resultMap="empAndDeptResultMapOne">
+        <!--两表联查-->
+        select * from t_emp left join t_dept on t_emp.did = t_dept.did where t_emp.eid = #{eid}
+    </select>
+
+    <!--处理多对一映射关系方式一:1.级联属性赋值-->
     <resultMap id="empAndDeptResultMapOne" type="Emp">
         <id property="eid" column="eid"></id>
         <result property="empName" column="emp_name"></result>
@@ -43,8 +50,10 @@
         <result property="dept.did" column="did"></result>
         <result property="dept.deptName" column="dept_name"></result>
     </resultMap>
-
-
+    <!--
+          处理多对一映射关系方式二:2.association标签
+          property:属性名  javaType：类型名
+      -->
     <resultMap id="empAndDeptResultMapTwo" type="Emp">
         <id property="eid" column="eid"></id>
         <result property="empName" column="emp_name"></result>
@@ -52,10 +61,6 @@
         <result property="sex" column="sex"></result>
         <result property="email" column="email"></result>
         <result property="dept.did" column="did"></result>
-        <!--
-            处理多对一映射关系方式二:association标签
-            property:属性名  javaType：类型名
-        -->
         <association property="dept" javaType="Dept">
             <id property="did" column="did"></id>
             <result property="deptName" column="dept_name"></result>
@@ -63,16 +68,19 @@
     </resultMap>
 
 
-    <!--
-        Emp getEmpAndDept(@Param("eid") Integer eid);
-    -->
-    <select id="getEmpAndDept" resultMap="empAndDeptResultMapTwo">
-        <!--两表联查-->
-        select * from t_emp left join t_dept on t_emp.did = t_dept.did where t_emp.eid = #{eid}
+    <!--Emp getEmpAndDeptByStepOne(@Param("eid") Integer eid);-->
+    <select id="getEmpAndDeptByStepOne" resultMap="empAndDeptByStepResultMap">
+        select *
+        from t_emp
+        where eid = #{eid}
     </select>
 
+    <!--List<Emp> getDeptAndEmpByStepTwo(@Param("did") Integer did);-->
+    <select id="getDeptAndEmpByStepTwo" resultType="Emp">
+        select * from t_emp where did = #{did}
+    </select>
 
-    <!--处理多对一映射关系方式三:分步查询-->
+    <!--处理多对一映射关系方式三:3.分步查询-->
     <resultMap id="empAndDeptByStepResultMap" type="Emp">
         <id property="eid" column="eid"></id>
         <result property="empName" column="emp_name"></result>
@@ -82,22 +90,9 @@
         <association property="dept" select="com.pxy.mybatis.mapper.DeptMapper.getEmpAndDeptByStepTwo" column="did">
         </association>
         <!--
-                select:设置分步查询的sql的唯一标识（namespace.SQLId或mapper接口的全类名.方法名）
-                column:设置分步查询的条件
-                fetchType:开启全局延迟加载后，可手动控制延迟加载效果（lazy(默认)|eager(立即加载)）
+            select:设置分步查询的sql的唯一标识（namespace.SQLId或mapper接口的全类名.方法名）
+            column:设置分步查询的条件
+            fetchType:开启全局延迟加载后，可手动控制延迟加载效果（lazy(默认)|eager(立即加载)）
         -->
     </resultMap>
-    <!--    Emp getEmpAndDeptByStepOne(@Param("eid") Integer eid);-->
-    <select id="getEmpAndDeptByStepOne" resultMap="empAndDeptByStepResultMap">
-        select *
-        from t_emp
-        where eid = #{eid}
-    </select>
-
-<!--    List<Emp> getDeptAndEmpByStepTwo(@Param("did") Integer did);
--->
-    <select id="getDeptAndEmpByStepTwo" resultType="Emp">
-        select * from t_emp where did = #{did}
-    </select>
-
 </mapper>

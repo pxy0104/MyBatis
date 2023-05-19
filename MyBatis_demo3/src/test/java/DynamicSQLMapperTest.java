@@ -4,6 +4,7 @@ import com.pxy.mybatis.utils.SqlSessionUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DynamicSQLMapperTest {
@@ -23,10 +24,23 @@ public class DynamicSQLMapperTest {
      * when至少要有一个，otherwise至多要有一个
      * 5.foreach
      */
-
+    @Test
+    public void testInsertMoreByList() {
+        Emp emp = new Emp(null, "test", 18, "男", "123");
+        Emp emp1 = new Emp(null, "test", 18, "男", "123");
+        Emp emp2 = new Emp(null, "test", 18, "男", "123");
+        ArrayList<Emp> list = new ArrayList<>();
+        list.add(emp);
+        list.add(emp1);
+        list.add(emp2);
+        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        DynamicSQLMapper mapper = sqlSession.getMapper(DynamicSQLMapper.class);
+        int i = mapper.insertMoreByList(list);
+        System.out.println(i);
+    }
     @Test
     public void testDeleteMoreByArray() {
-        Integer arr[] = {4,5,6};
+        Integer arr[] = {5,6,7,8};
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         DynamicSQLMapper mapper = sqlSession.getMapper(DynamicSQLMapper.class);
         int deleteMoreByArray = mapper.deleteMoreByArray(arr);
@@ -36,17 +50,16 @@ public class DynamicSQLMapperTest {
     public void testGetEmpByChoose() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         DynamicSQLMapper mapper = sqlSession.getMapper(DynamicSQLMapper.class);
-        List<Emp> emp = mapper.getEmpByChoose(new Emp(null, "", null, "", ""));
+        List<Emp> emp = mapper.getEmpByChoose(new Emp(null, "张三", 13, "男", ""));
         System.out.println(emp);
     }
+
 
     @Test
-    public void testGetEmpByConditon() {
+    public void testGetEmpByCondition() {
         SqlSession sqlSession = SqlSessionUtils.getSqlSession();
         DynamicSQLMapper mapper = sqlSession.getMapper(DynamicSQLMapper.class);
-        List<Emp> emp = mapper.getEmpByCondition(new Emp(null, "张三", 23, "", ""));
+        List<Emp> emp = mapper.getEmpByCondition(new Emp(null, null, null, null, ""));
         System.out.println(emp);
     }
-
-
 }
